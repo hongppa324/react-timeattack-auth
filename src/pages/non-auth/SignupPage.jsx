@@ -8,17 +8,33 @@ const SignupPage = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    if (!isLogin) {
+      try {
+        const { data } = await authApi.post("/register", {
+          id,
+          password,
+          nickname,
+        });
+        if (data.success) {
+          alert("회원가입에 성공하였습니다. 로그인 페이지로 이동할게요");
+          navigate("/login");
+        }
+      } catch (error) {
+        alert(error);
+        console.log("error", error);
+      }
+    }
+  };
 
   return (
     <div>
       <h1>Signup</h1>
       <p>Signup page</p>
 
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-        }}
-      >
+      <form onSubmit={onSubmitHandler}>
         <div>
           <label htmlFor="id">id</label>
           <input />

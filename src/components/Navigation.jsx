@@ -8,7 +8,7 @@ const Navigation = () => {
     <nav>
       {/* 로그인 또는 로그아웃 버튼 */}
       <button>로그아웃</button>
-      <button>로그인하러가기</button>
+      <button onClick={() => navigate("/login")}>로그인하러가기</button>
 
       <ul
         style={{
